@@ -7,7 +7,7 @@ This challenge is a simple flutter app that fetches data from the [Cat API](http
 ## Requirements
 
 - Flutter 3.24.4
-- Riverpod 1.0.3 `dart run build_runner watch`
+- Riverpod `dart run build_runner watch`
 
 ## Running the app
 
