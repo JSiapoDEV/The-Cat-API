@@ -26,8 +26,15 @@ jobs:
           channel: stable
           flutter-version: 3.24.4
 
+      - name: Generate .env file
+        run: |
+          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Runners
+        run: flutter pub run build_runner build --delete-conflicting-outputs
 
       - name: Build APK
         run: flutter build apk --debug
