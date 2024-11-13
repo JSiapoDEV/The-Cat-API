@@ -50,21 +50,26 @@ class CatSearchDelegate extends SearchDelegate<Future<CatBreed?>?> {
                   ? const Center(
                       child: Text('No se encontraron resultados'),
                     )
-                  : ListView.builder(
-                      itemBuilder: (context, index) {
-                        final item = snapshot.data![index];
-                        return ListTile(
-                          title: Text(item.name ?? ''),
-                          onTap: () {
-                            ref.read(selectedCatBreedProvider.notifier).state =
-                                item;
+                  : snapshot.data!.isEmpty
+                      ? const Center(
+                          child: Text('No se encontraron resultados'),
+                        )
+                      : ListView.builder(
+                          itemBuilder: (context, index) {
+                            final item = snapshot.data![index];
+                            return ListTile(
+                              title: Text(item.name ?? ''),
+                              onTap: () {
+                                ref
+                                    .read(selectedCatBreedProvider.notifier)
+                                    .state = item;
                                 Navigator.of(context).pushNamed('/detail');
-                            // close(context, Future.value(item));
+                                // close(context, Future.value(item));
+                              },
+                            );
                           },
+                          itemCount: snapshot.data!.length,
                         );
-                      },
-                      itemCount: snapshot.data!.length,
-                    );
             }
             return const Center(
               child: Text('No se encontraron resultados'),

@@ -2,6 +2,8 @@
 
 This challenge is a simple flutter app that fetches data from the [Cat API](https://api.thecatapi.com/).
 
+![alt text](939shots_so.png)
+
 ## Requirements
 
 - Flutter 3.24.4
