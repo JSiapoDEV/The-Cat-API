@@ -26,11 +26,11 @@ class ApiService {
         // return [];
         return data.map((item) => CatBreed.fromJson(item)).toList();
       } else {
-        throw Exception('Failed to load items1');
+        throw Exception('Failed to load items');
       }
     } catch (e) {
       log('Error: $e');
-      throw Exception('Failed to load items2');
+      throw Exception('Failed to load items');
     }
   }
 
@@ -46,11 +46,11 @@ class ApiService {
         }
         return data.map((item) => CatBreed.fromJson(item)).toList();
       } else {
-        throw Exception('Failed to load items1');
+        throw Exception('Failed to load items');
       }
     } catch (e) {
       log('Error: $e');
-      throw Exception('Failed to load items2');
+      throw Exception('Failed to load items');
     }
   }
 }
