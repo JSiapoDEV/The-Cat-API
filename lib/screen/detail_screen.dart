@@ -18,6 +18,7 @@ class DetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedCat.name ?? ""),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

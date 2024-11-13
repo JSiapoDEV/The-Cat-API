@@ -45,6 +45,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
       bottom: false,
       child: Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             title: const Text('Cat Breeds'),
             actions: [
               IconButton(
