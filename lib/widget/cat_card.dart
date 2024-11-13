@@ -5,33 +5,41 @@ import 'package:tca/model/bread.dart';
 
 class ShimmerImage extends StatelessWidget {
   final String imageUrl;
+  final String tag;
   final double width;
   final double height;
 
   const ShimmerImage({
     super.key,
     required this.imageUrl,
+    this.tag = "",
     this.width = double.infinity,
     this.height = 200.0,
   });
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
-      width: width,
-      height: height,
-      fit: BoxFit.scaleDown,
-      placeholder: (context, url) => Shimmer.fromColors(
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
-        child: Container(
-          width: width,
-          height: height,
-          color: Colors.white,
+    return Hero(
+      tag: tag,
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        width: width,
+        height: height,
+        fit: BoxFit.scaleDown,
+        placeholder: (context, url) => Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
+          child: Container(
+            width: width,
+            height: height,
+            color: Colors.white,
+          ),
+        ),
+        errorWidget: (context, url, error) => const Icon(
+          Icons.error,
+          color: Colors.red,
         ),
       ),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }
@@ -55,7 +63,9 @@ class CatCard extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     catBreed.name ?? "",
-                    style: const TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold),
                   ),
                   const Expanded(
                     child: Text(
@@ -68,11 +78,22 @@ class CatCard extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: ShimmerImage(
-                  imageUrl:
-                      "https://cdn2.thecatapi.com/images/${catBreed.referenceImageId}.jpg",
-                  height: 300,
-                ),
+                child: catBreed.referenceImageId != null
+                    ? ShimmerImage(
+                        imageUrl:
+                            "https://cdn2.thecatapi.com/images/${catBreed.referenceImageId}.jpg",
+                        height: 300,
+                        tag: catBreed.id ?? "",
+                      )
+                    : const SizedBox(
+                        height: 300,
+                        child: Center(
+                          child: Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
               ),
               Row(
                 children: <Widget>[

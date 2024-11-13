@@ -27,6 +27,7 @@ class DetailScreen extends ConsumerWidget {
               imageUrl:
                   "https://cdn2.thecatapi.com/images/${selectedCat.referenceImageId}.jpg",
               height: 300,
+              tag: selectedCat.id ?? "",
             ),
             Expanded(child: ListOfDetails(info: selectedCat)),
             // ListOfDetails(info: selectedCat),

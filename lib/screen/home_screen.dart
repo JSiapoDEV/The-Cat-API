@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tca/items_provider.dart';
 import 'package:tca/widget/cat_card.dart';
+import 'package:tca/widget/cat_search.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -11,11 +12,10 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class HomeScreenState extends ConsumerState<HomeScreen> {
-
   late ScrollController _scrollController;
   late CatStream catStreamNotifier;
 
-    @override
+  @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
@@ -44,32 +44,42 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
       top: false,
       bottom: false,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Cat Breeds'),
-        ),
-        body: catStream.when(
-        data: (items) {
-          return ListView.builder(
-            shrinkWrap: true,
-            controller: _scrollController,
-            itemCount: items.length + (catStreamNotifier.hasMore ? 1 : 0),
-            itemBuilder: (context, index) {
-              if (index < items.length) {
-                return GestureDetector(
-                  onTap: () {
-                    ref.read(selectedCatBreedProvider.notifier).state = items[index];
-                    Navigator.of(context).pushNamed('/detail');
-                  },
-                  child: CatCard(catBreed: items[index]));
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
+          appBar: AppBar(
+            title: const Text('Cat Breeds'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  showSearch(context: context, delegate: CatSearchDelegate());
+                  // showSearch(context: context, delegate: CatSearchDelegate());
+                },
+              ),
+            ],
+          ),
+          body: catStream.when(
+            data: (items) {
+              return ListView.builder(
+                shrinkWrap: true,
+                controller: _scrollController,
+                itemCount: items.length + (catStreamNotifier.hasMore ? 1 : 0),
+                itemBuilder: (context, index) {
+                  if (index < items.length) {
+                    return GestureDetector(
+                        onTap: () {
+                          ref.read(selectedCatBreedProvider.notifier).state =
+                              items[index];
+                          Navigator.of(context).pushNamed('/detail');
+                        },
+                        child: CatCard(catBreed: items[index]));
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              );
             },
-          );
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(child: Text('Error: $error')),
-      )),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stack) => Center(child: Text('Error: $error')),
+          )),
     );
   }
 }
