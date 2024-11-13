@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.manropeTextTheme(),
       ),
       darkTheme: ThemeData.dark(),
-      title: 'Cat Breeds',
+      title: 'CatFinder',
       routes: appRoutes,
       initialRoute: '/home',
       onUnknownRoute: (settings) {
