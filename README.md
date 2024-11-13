@@ -1,16 +1,24 @@
-# tca
+# The Cat API Challenge 🐱
 
-A new Flutter project.
+This challenge is a simple flutter app that fetches data from the [Cat API](https://api.thecatapi.com/).
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- Flutter 3.24.4
+- Riverpod 1.0.3 `dart run build_runner watch`
 
-A few resources to get you started if this is your first Flutter project:
+## Running the app
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Create .env file in the root directory of the project.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Add the following line to the .env
+
+```dart
+API_KEY=YOUR_API_KEY
+```
+
+1. Run the app using the following command
+
+```dart
+flutter run
+```

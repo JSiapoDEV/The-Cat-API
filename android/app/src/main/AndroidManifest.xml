@@ -3,6 +3,9 @@
         android:label="tca"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- internet permission -->
+        <uses-permission android:name="android.permission.INTERNET" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
